@@ -20,6 +20,7 @@ import { Button, message } from "antd";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Footer from "@/components/layout/Footer";
+import { isString } from "lodash";
 
 const posters: PosterOptions[] = [
   {
@@ -88,7 +89,7 @@ const FoodMenu: React.FC = () => {
         const cartItem: CartItem = {
           id: product.id,
           name: product.name,
-          price: product.price,
+          price: isString(product.price) ? parseInt(product.price) : product.price,
           description: product.description,
           type: product.type,
           picture: product.picture,
@@ -182,8 +183,8 @@ const FoodMenu: React.FC = () => {
   };
   return (
     <>
-      <div className="flex flex-col lg:flex-row text-black relative bg-white  ">
-        <aside className="w-full lg:w-1/4  mb-4 lg:mb-0 m-3 sticky top-20 right-0">
+      <div className="flex flex-col lg:flex-row text-black  bg-white  ">
+        <aside className="w-full lg:w-1/4  mb-4 lg:mb-0 m-3">
           <ul className="space-y-2 w-full">
             <button
               type="button"
@@ -206,15 +207,8 @@ const FoodMenu: React.FC = () => {
             ))}
           </ul>
         </aside>
-        <main className="w-full p-4 relative bg-white">
-          <div className="mb-4 p-4 bg-green-500 flex justify-between items-center">
-            <p className="text-lg font-bold text-black">Quỳnh Anh restaurant</p>
-            <div className="py-1 px-2 rounded">
-              <MainLogo />
-            </div>
-          </div>
-
-          <div className="w-full flex sticky top-20 z-30 bg-white items-center justify-between gap-1 my-5">
+        <main className="w-full p-4  relative bg-green-500 mt-2">
+          <div className="w-full flex z-30 bg-white items-center justify-between gap-1 mb-5  sticky top-2 ">
             <input
               type="text"
               value={searchTerm}
@@ -222,9 +216,6 @@ const FoodMenu: React.FC = () => {
               placeholder="Tìm món"
               className="border rounded p-2 w-full"
             />
-            <Button className="bg-white  text-green-500" loading={loading}>
-              {loading ? "" : <CheckCircleIcon />}
-            </Button>
           </div>
           <div className={`transition-opacity duration-500`}>
             {loading ? (
@@ -244,7 +235,7 @@ const FoodMenu: React.FC = () => {
               foods.map((food) => (
                 <div
                   key={food.id}
-                  className="flex items-center justify-between mb-4 p-3 box-shadow"
+                  className="flex items-center justify-between mb-4 p-3 box-shadow bg-white"
                 >
                   <div className="flex items-center">
                     <div className="h-16 w-24 relative">

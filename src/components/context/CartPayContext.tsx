@@ -45,7 +45,7 @@ export const CartPayProvider: React.FC<{ children: ReactNode }> = ({
     setSelectedItems([]);
   };
 
-  const getTotalPrice = () => {
+  const getTotalPrice = () : number => {
     return selectedItems.reduce(
       (total, item) => total + item.price * item.quantity,
       0

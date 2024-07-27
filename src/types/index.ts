@@ -92,7 +92,7 @@ export interface CartItem {
   picture: string;
   type: string;
   description: string;
-  price: number | string ; // Ensure this is a number
+  price: number ; // Ensure this is a number
 }
 
 export interface CartItem {
